@@ -16,6 +16,8 @@ Além da busca principal, a aplicação possui pesquisa avançada por geração 
 - `https://pokeapi.co/api/v2/pokemon/{nome-ou-id}`
 - `https://pokeapi.co/api/v2/pokemon`
 - `https://pokeapi.co/api/v2/type/{tipo}`
+- `https://pokeapi.co/api/v2/generation`
+- `https://pokeapi.co/api/v2/generation/{id}`
 - Endpoint de espécie disponibilizado pela própria resposta da PokéAPI
 
 ## Funcionalidades
@@ -29,6 +31,10 @@ Além da busca principal, a aplicação possui pesquisa avançada por geração 
 - Exibir quantidade de habilidades
 - Exibir descrição do Pokémon
 - Layout responsivo para diferentes tamanhos de tela
+- Mostrar sugestões durante a digitação
+- Pesquisar Pokémon por geração
+- Pesquisar Pokémon por tipo
+- Exibir avisos para buscas inválidas ou falhas na API
 
 ## Tecnologias utilizadas
 
@@ -37,6 +43,8 @@ Além da busca principal, a aplicação possui pesquisa avançada por geração 
 - JavaScript
 - Fetch API
 - PokéAPI
+- Git e GitHub
+- GitHub Pages
 
 ## Como executar localmente
 
