@@ -1,0 +1,737 @@
+/* ======================================== */
+/* CONFIGURAÇÕES GERAIS                     */
+/* ======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f4f6f8;
+
+    color: #222;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 700px;
+
+    margin: 40px auto;
+}
+
+
+/* ======================================== */
+/* CABEÇALHO                                */
+/* ======================================== */
+
+header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+header h1 {
+    font-size: 42px;
+
+    color: #e63946;
+}
+
+
+header p {
+    margin-top: 8px;
+
+    color: #666;
+}
+
+
+/* ======================================== */
+/* ÁREA DE BUSCA                            */
+/* ======================================== */
+
+.area-busca {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+
+    margin-bottom: 15px;
+}
+
+
+.campo-container {
+    position: relative;
+
+    flex: 1;
+}
+
+
+#campo-busca {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+
+#campo-busca:focus {
+    outline: 2px solid #e63946;
+
+    border-color: transparent;
+}
+
+
+#botao-buscar {
+    padding: 14px 22px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #e63946;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+#botao-buscar:hover {
+    background-color: #c92f3b;
+}
+
+
+/* ======================================== */
+/* SUGESTÕES                                */
+/* ======================================== */
+
+#sugestoes {
+    position: absolute;
+
+    width: 100%;
+
+    max-height: 250px;
+
+    overflow-y: auto;
+
+    background-color: white;
+
+    border-radius: 0 0 8px 8px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.15);
+
+    z-index: 10;
+}
+
+
+.sugestao-pokemon {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 12px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.sugestao-pokemon:hover {
+    background-color: #f1f1f1;
+}
+
+
+.sugestao-pokemon img {
+    width: 50px;
+    height: 50px;
+}
+
+
+/* ======================================== */
+/* PESQUISA AVANÇADA                        */
+/* ======================================== */
+
+.botao-abrir-avancada {
+    display: block;
+
+    margin: 0 auto 20px auto;
+
+    padding: 10px 18px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background-color: white;
+
+    color: #444;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.botao-abrir-avancada:hover {
+    background-color: #f1f1f1;
+
+    transform: translateY(-1px);
+}
+
+
+.oculto {
+    display: none;
+}
+
+
+.pesquisa-avancada {
+    margin-bottom: 30px;
+
+    padding: 22px;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.pesquisa-avancada h2 {
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 22px;
+}
+
+
+/* ======================================== */
+/* FILTROS                                  */
+/* ======================================== */
+
+.filtros-avancados {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.grupo-filtro {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.grupo-filtro label {
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+.grupo-filtro select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: #222;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.25s,
+        color 0.25s,
+        border-color 0.25s,
+        transform 0.2s;
+}
+
+
+.grupo-filtro select:hover {
+    transform: translateY(-1px);
+}
+
+
+.grupo-filtro select:focus {
+    outline: none;
+
+    border-color: #555;
+}
+
+
+/* ======================================== */
+/* BOTÃO PESQUISAR                          */
+/* ======================================== */
+
+.botao-filtrar {
+    display: block;
+
+    margin: 20px auto 0 auto;
+
+    padding: 11px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #e63946;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.botao-filtrar:hover {
+    background-color: #c92f3b;
+
+    transform: translateY(-1px);
+}
+
+
+/* ======================================== */
+/* RESULTADOS DA PESQUISA AVANÇADA          */
+/* ======================================== */
+
+.resultados-avancados {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.1);
+}
+
+
+.resultados-avancados h2 {
+    margin-bottom: 5px;
+}
+
+
+.quantidade-resultados {
+    margin-bottom: 20px;
+
+    color: #777;
+}
+
+
+.lista-avancada {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(130px, 1fr)
+        );
+
+    gap: 12px;
+}
+
+
+/* ======================================== */
+/* BOTÃO DE CADA POKÉMON                    */
+/* ======================================== */
+
+.pokemon-avancado {
+    padding: 12px;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: #333;
+
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.pokemon-avancado:hover {
+    transform: translateY(-3px);
+
+    background-color:
+        var(--cor-resultado);
+
+    color: white;
+
+    border-color:
+        var(--cor-resultado);
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* ======================================== */
+/* RESPONSIVIDADE DA PESQUISA AVANÇADA      */
+/* ======================================== */
+
+@media (max-width: 550px) {
+
+    .filtros-avancados {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ======================================== */
+/* RESULTADO                                */
+/* ======================================== */
+
+#resultado {
+    text-align: center;
+}
+
+
+.card-pokemon {
+    background-color: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+.card-pokemon h2 {
+    font-size: 32px;
+
+    margin-bottom: 5px;
+}
+
+
+.numero-pokemon {
+    color: #777;
+
+    margin-bottom: 15px;
+}
+
+
+/* ======================================== */
+/* IMAGEM DO POKÉMON                        */
+/* ======================================== */
+
+.area-imagem {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.imagem-pokemon {
+    width: 180px;
+
+    min-height: 180px;
+}
+
+
+/* ======================================== */
+/* BOTÃO SHINY                              */
+/* ======================================== */
+
+.botao-shiny {
+    margin-top: 10px;
+
+    padding: 8px 15px;
+
+    border: 2px solid #f7c948;
+    border-radius: 20px;
+
+    background-color: white;
+
+    color: #9b7b00;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.botao-shiny:hover {
+    transform: scale(1.05);
+}
+
+
+.botao-shiny.ativo {
+    background-color: #f7c948;
+
+    color: #222;
+}
+
+
+/* ======================================== */
+/* TIPOS                                    */
+/* ======================================== */
+
+.tipos {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+}
+
+
+.tipo {
+    padding: 7px 14px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 1px 2px
+        rgba(0, 0, 0, 0.4);
+}
+
+
+/* ======================================== */
+/* INFORMAÇÕES                              */
+/* ======================================== */
+
+.informacoes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+.informacao {
+    background-color: #f4f6f8;
+
+    padding: 15px;
+
+    border-radius: 10px;
+}
+
+
+.informacao strong {
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+/* ======================================== */
+/* DESCRIÇÃO                                */
+/* ======================================== */
+
+.descricao {
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #ddd;
+
+    line-height: 1.6;
+
+    color: #555;
+}
+
+
+.descricao strong {
+    display: block;
+
+    margin-bottom: 10px;
+}
+
+
+/* ======================================== */
+/* RESULTADOS DA PESQUISA AVANÇADA          */
+/* ======================================== */
+
+.resultados-avancados {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.1);
+}
+
+
+.resultados-avancados h2 {
+    margin-bottom: 5px;
+}
+
+
+.quantidade-resultados {
+    margin-bottom: 20px;
+
+    color: #777;
+}
+
+
+.lista-avancada {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(130px, 1fr)
+        );
+
+    gap: 12px;
+}
+
+
+.pokemon-avancado {
+    padding: 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    background-color: #f8f8f8;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+
+.pokemon-avancado:hover {
+    transform: translateY(-2px);
+
+    background-color: #e63946;
+
+    color: white;
+
+    border-color: #e63946;
+}
+
+
+/* ======================================== */
+/* MENSAGENS                                */
+/* ======================================== */
+
+.erro {
+    padding: 20px;
+
+    background-color: #ffe5e5;
+
+    color: #b00020;
+
+    border-radius: 10px;
+}
+
+
+.carregando {
+    padding: 20px;
+
+    color: #555;
+}
+
+
+.mensagem-inicial {
+    color: #777;
+}
+
+
+/* ======================================== */
+/* RESPONSIVIDADE                           */
+/* ======================================== */
+
+@media (max-width: 550px) {
+
+    .area-busca {
+        flex-direction: column;
+    }
+
+
+    #botao-buscar {
+        width: 100%;
+    }
+
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+
+    .filtros-avancados {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card-pokemon {
+        padding: 20px;
+    }
+
+}

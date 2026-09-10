@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BootDex</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header>
+
+            <h1>BootDex</h1>
+
+            <p>
+                Pesquise um Pokémon pelo nome ou número.
+            </p>
+
+        </header>
+
+
+        <!-- ====================================== -->
+        <!-- BUSCA NORMAL                           -->
+        <!-- ====================================== -->
+
+        <section class="area-busca">
+
+            <div class="campo-container">
+
+                <input
+                    type="text"
+                    id="campo-busca"
+                    placeholder="Ex: Pikachu"
+                    autocomplete="off"
+                >
+
+                <div id="sugestoes"></div>
+
+            </div>
+
+
+            <button
+                id="botao-buscar"
+                type="button"
+            >
+                Buscar
+            </button>
+
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- BOTÃO DA PESQUISA AVANÇADA             -->
+        <!-- ====================================== -->
+
+        <button
+            id="botao-abrir-avancada"
+            class="botao-abrir-avancada"
+            type="button"
+        >
+            ⚙ Pesquisa avançada
+        </button>
+
+
+        <!-- ====================================== -->
+        <!-- PESQUISA AVANÇADA                      -->
+        <!-- ====================================== -->
+
+        <section
+            id="pesquisa-avancada"
+            class="pesquisa-avancada oculto"
+        >
+
+            <h2>
+                Pesquisa avançada
+            </h2>
+
+
+            <div class="filtros-avancados">
+
+                <div class="grupo-filtro">
+
+                    <label for="filtro-geracao">
+                        Geração
+                    </label>
+
+                    <select id="filtro-geracao">
+
+                        <option value="">
+                            Selecione a geração
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="grupo-filtro">
+
+                    <label for="filtro-tipo">
+                        Tipo
+                    </label>
+
+                    <select id="filtro-tipo">
+
+                        <option value="">
+                            Selecione um tipo
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="botao-filtrar"
+                class="botao-filtrar"
+                type="button"
+            >
+                Pesquisar
+            </button>
+
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- RESULTADO                              -->
+        <!-- ====================================== -->
+
+        <section id="resultado">
+
+            <p class="mensagem-inicial">
+                Escolha um Pokémon para começar.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
