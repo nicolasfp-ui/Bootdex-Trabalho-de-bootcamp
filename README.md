@@ -35,6 +35,8 @@ Além da busca principal, a aplicação possui pesquisa avançada por geração 
 - Pesquisar Pokémon por geração
 - Pesquisar Pokémon por tipo
 - Exibir avisos para buscas inválidas ou falhas na API
+- Combinar filtros de geração e tipo
+- Alternar entre imagem normal e versão shiny
 
 ## Tecnologias utilizadas
 
