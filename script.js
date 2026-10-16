@@ -453,6 +453,8 @@ async function buscarPokemon() {
         // BOTÃO SHINY                             //
         // ========================================//
 
+        window.bootdexFavoritos.mostrarBotao(dados);
+
         const imagemPokemon =
             document.getElementById(
                 "imagem-pokemon"

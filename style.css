@@ -8,6 +8,45 @@
     padding: 0;
 }
 
+/* Etapa 02: lista compartilhada, independente dos resultados da PokéAPI. */
+.favoritos {
+    margin-top: 30px;
+    padding: 24px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.favoritos p { margin: 12px 0; line-height: 1.5; }
+.favoritos ul { list-style: none; }
+.favoritos li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+}
+.favoritos button, #salvar-favorito {
+    border: 1px solid #c92f3b;
+    border-radius: 8px;
+    background: #c92f3b;
+    color: white;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+#salvar-favorito { margin-top: 20px; }
+.favoritos button:disabled, #salvar-favorito:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.favoritos button:focus-visible, #salvar-favorito:focus-visible {
+    outline: 3px solid #457b9d;
+    outline-offset: 3px;
+}
+
 
 body {
     min-height: 100vh;
