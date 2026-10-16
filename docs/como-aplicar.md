@@ -1,6 +1,6 @@
 # Aplicar a Etapa 02 preservando os seis commits
 
-O pacote contém o código-fonte e `Bootdex-etapa-02.bundle`, um arquivo Git com o histórico original e os seis novos commits. A conexão GitHub disponível na preparação tinha apenas leitura; os commits não foram enviados ao repositório remoto.
+O pacote contém o código-fonte e `Bootdex-etapa-02.bundle`, um arquivo Git com o histórico original, os seis commits iniciais e a correção posterior da busca/exportação em quatro arquivos. A conexão GitHub disponível na preparação tinha apenas leitura; os commits não foram enviados ao repositório remoto.
 
 ## Opção recomendada: trazer os commits para o mesmo repositório
 

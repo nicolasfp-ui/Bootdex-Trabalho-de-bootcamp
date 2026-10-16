@@ -4,7 +4,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { chromium } = require('playwright');
 
-async function setup(t, configured = true) {
+async function setup(t, configured = true, missingIntegration = false) {
   const browser = await chromium.launch({ headless: true, channel: process.env.BROWSER_CHANNEL || undefined });
   t.after(() => browser.close());
   const page = await browser.newPage();
@@ -14,12 +14,22 @@ async function setup(t, configured = true) {
   await page.route('**/*', async route => {
     const url = new URL(route.request().url());
     if (url.hostname === 'bootdex.test') {
+      if (missingIntegration && ['/config.js', '/favoritos-api.js', '/favoritos-ui.js'].includes(url.pathname)) {
+        return route.fulfill({ status: 404, body: '' });
+      }
       if (url.pathname === '/config.js' && configured) {
         return route.fulfill({ contentType: 'application/javascript', body: 'window.BOOTDEX_CONFIG={url:"https://teste.supabase.co",chavePublica:"sb_publishable_teste"}' });
       }
       const name = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
       const contentType = name.endsWith('.js') ? 'application/javascript' : name.endsWith('.css') ? 'text/css' : 'text/html';
-      return route.fulfill({ contentType, body: await fs.readFile(path.join(__dirname, '../..', name)) });
+      const root = process.env.BOOTDEX_TEST_ROOT || path.join(__dirname, '../..');
+      let body = await fs.readFile(path.join(root, name), 'utf8');
+      if (process.env.BOOTDEX_TEST_ROOT && configured && name === 'script.js') {
+        // Preenche somente os campos públicos da configuração da exportação.
+        body = body.replace('url: ""', 'url: "https://teste.supabase.co"')
+          .replace('chavePublica: ""', 'chavePublica: "sb_publishable_teste"');
+      }
+      return route.fulfill({ contentType, body });
     }
     if (url.hostname === 'teste.supabase.co') {
       const method = route.request().method();
@@ -103,4 +113,14 @@ test('gravação bem-sucedida seguida de falha de leitura explica que o registro
   await page.getByRole('button', { name: 'Salvar favorito', exact: true }).click();
   await page.getByText(/Favorito salvo, mas não foi possível atualizar a lista/).waitFor();
   assert.equal(records.length, 1);
+});
+
+test('a busca não acusa falha de API quando faltam os arquivos dos favoritos', async t => {
+  const { page } = await setup(t, false, true);
+  await page.locator('#campo-busca').fill('pikachu');
+  await page.locator('#botao-buscar').click();
+  await page.waitForFunction(() => document.querySelector('#resultado').textContent.includes('Electric mouse.') || document.querySelector('#resultado').textContent.includes('Não foi possível conectar'));
+  assert.match(await page.locator('#resultado').innerText(), /Electric mouse/);
+  await page.locator('#botao-shiny').click();
+  assert.equal(await page.locator('#imagem-pokemon').getAttribute('src'), 'https://images.test/shiny.png');
 });

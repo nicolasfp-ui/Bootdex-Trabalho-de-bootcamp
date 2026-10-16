@@ -12,6 +12,10 @@ Pokédex em HTML, CSS e JavaScript, com favoritos compartilhados no PostgreSQL d
 
 Os commits foram preparados localmente: a conexão GitHub disponível tinha somente leitura. Veja [como importar e enviar os seis commits](docs/como-aplicar.md) usando o bundle incluído no pacote.
 
+### Exportação em quatro arquivos
+
+O projeto completo usa arquivos separados para a configuração e os favoritos. Para entregar somente `index.html`, `script.js`, `style.css` e `README.md`, execute `node scripts/exportar-quatro.cjs PASTA_DESTINO`. Essa exportação incorpora a configuração e os favoritos no `script.js` e remove as referências extras do HTML; nela, preencha o Supabase no início do `script.js`. Não copie apenas quatro arquivos da versão modular: a busca agora tolera a ausência da integração, mas os favoritos precisam de seus módulos ou da exportação consolidada.
+
 ## Persistência — Etapa 02
 
 ### Dados e funcionamento
@@ -187,7 +191,7 @@ npm run test:browser
 
 Alternativamente, para usar Edge instalado no Windows, configure `$env:BROWSER_CHANNEL = "msedge"` antes de `npm run test:browser`.
 
-Foram verificados **3 testes da API e 4 de interface**, cobrindo criar/reabrir/excluir, erros e duplicata, ausência de configuração, busca/shiny, abrir favorito e gravação seguida de falha ao atualizar a lista. As respostas das APIs são controladas: **os testes não comprovam execução do SQL, RLS real ou gravação no Supabase**.
+Foram verificados **3 testes da API e 5 de interface**, cobrindo criar/reabrir/excluir, erros e duplicata, ausência de configuração, busca/shiny, abrir favorito, gravação seguida de falha ao atualizar a lista e busca quando faltam módulos dos favoritos. As respostas das APIs são controladas: **os testes não comprovam execução do SQL, RLS real ou gravação no Supabase**.
 
 O build foi tentado, mas o serviço Docker local não estava ativo (`dockerDesktopLinuxEngine` indisponível). Imagem e containers não foram validados. O workflow [verificar.yml](.github/workflows/verificar.yml) está preparado para testar, construir e servir a imagem no GitHub Actions; o resultado dependerá de sua execução no GitHub.
 
@@ -203,6 +207,8 @@ O histórico original foi preservado. A branch `etapa-02` organiza a evolução 
 6. `docs: documentar entrega, sidequests e verificações automatizadas` — documentação e workflow.
 
 Confira com `git log --oneline`. Ao integrar, **preserve os commits, sem squash**, para manter a evolução exigida. Configuração e evidências reais podem gerar commits adicionais.
+
+Uma correção posterior aos seis commits iniciais protege a busca quando faltam os módulos de favoritos e acrescenta a exportação funcional em quatro arquivos.
 
 ## Checklist para a entrega no Moodle
 

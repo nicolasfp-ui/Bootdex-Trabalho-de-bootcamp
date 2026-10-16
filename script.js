@@ -453,7 +453,8 @@ async function buscarPokemon() {
         // BOTÃO SHINY                             //
         // ========================================//
 
-        window.bootdexFavoritos.mostrarBotao(dados);
+        // A busca da Etapa 01 continua funcionando se a integração não carregar.
+        window.bootdexFavoritos?.mostrarBotao(dados);
 
         const imagemPokemon =
             document.getElementById(
