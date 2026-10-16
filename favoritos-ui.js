@@ -33,7 +33,7 @@
             excluir.setAttribute("aria-label", `Excluir ${titulo}`);
             excluir.addEventListener("click", () => executar(async () => {
                 await repositorio.excluir(favorito.id);
-                await recarregar("Favorito excluído.");
+                await atualizarAposMutacao("Favorito excluído");
             }));
             item.append(texto, excluir);
             lista.append(item);
@@ -59,6 +59,14 @@
         }
     }
 
+    async function atualizarAposMutacao(sucesso) {
+        try {
+            await recarregar(`${sucesso} no banco.`);
+        } catch (erro) {
+            mensagem(`${sucesso}, mas não foi possível atualizar a lista. Clique em Atualizar lista. ${erro.message}`, true);
+        }
+    }
+
     window.bootdexFavoritos = {
         mostrarBotao(pokemon) {
             const botao = document.createElement("button");
@@ -68,7 +76,7 @@
             botao.disabled = !repositorio || ocupado;
             botao.addEventListener("click", () => executar(async () => {
                 await repositorio.salvar(pokemon);
-                await recarregar("Favorito salvo no banco.");
+                await atualizarAposMutacao("Favorito salvo");
             }));
             document.querySelector("#resultado .card-pokemon").append(botao);
         }

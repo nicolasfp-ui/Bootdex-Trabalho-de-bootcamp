@@ -10,6 +10,7 @@ async function setup(t, configured = true) {
   const page = await browser.newPage();
   const records = [];
   let failure = false;
+  let readFailure = false;
   await page.route('**/*', async route => {
     const url = new URL(route.request().url());
     if (url.hostname === 'bootdex.test') {
@@ -23,6 +24,7 @@ async function setup(t, configured = true) {
     if (url.hostname === 'teste.supabase.co') {
       const method = route.request().method();
       if (failure) return route.fulfill({ status: 403, json: { code: '42501' } });
+      if (readFailure && method === 'GET') return route.fulfill({ status: 503, json: {} });
       if (method === 'POST') {
         if (records.length) return route.fulfill({ status: 409, json: { code: '23505' } });
         records.push({ id: 'abc', ...route.request().postDataJSON(), criado_em: '2026-10-16' });
@@ -45,7 +47,7 @@ async function setup(t, configured = true) {
     return route.fulfill({ status: 204, body: '' });
   });
   await page.goto('https://bootdex.test/');
-  return { page, records, fail: () => { failure = true; } };
+  return { page, records, fail: () => { failure = true; }, failReads: () => { readFailure = true; } };
 }
 
 test('salvar, recarregar e excluir pela interface; busca e shiny preservados', async t => {
@@ -84,4 +86,15 @@ test('falha RLS aparece e não remove favorito da interface', async t => {
   await page.getByRole('button', { name: 'Excluir Pikachu' }).click();
   await page.getByText(/Acesso negado/).waitFor();
   assert.equal(await page.locator('#lista-favoritos li').count(), 1);
+});
+
+test('gravação bem-sucedida seguida de falha de leitura explica que o registro foi salvo', async t => {
+  const { page, records, failReads } = await setup(t);
+  await page.getByText('Nenhum favorito salvo.').waitFor();
+  await page.locator('#campo-busca').fill('pikachu');
+  await page.locator('#botao-buscar').click();
+  failReads();
+  await page.getByRole('button', { name: 'Salvar favorito', exact: true }).click();
+  await page.getByText(/Favorito salvo, mas não foi possível atualizar a lista/).waitFor();
+  assert.equal(records.length, 1);
 });
