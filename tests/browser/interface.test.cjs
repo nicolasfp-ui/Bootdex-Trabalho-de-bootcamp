@@ -35,7 +35,7 @@ async function setup(t, configured = true) {
     }
     if (url.hostname === 'pokeapi.co') {
       let data = { results: [] };
-      if (url.pathname.endsWith('/pokemon/pikachu')) data = {
+      if (url.pathname.endsWith('/pokemon/pikachu') || url.pathname.endsWith('/pokemon/25')) data = {
         id: 25, name: 'pikachu', species: { url: 'https://pokeapi.co/api/v2/pokemon-species/25' },
         sprites: { other: { 'official-artwork': { front_default: 'https://images.test/normal.png', front_shiny: 'https://images.test/shiny.png' } } },
         types: [{ type: { name: 'electric' } }], height: 4, weight: 60, base_experience: 112, abilities: [{ ability: { name: 'static' } }]
@@ -62,6 +62,10 @@ test('salvar, recarregar e excluir pela interface; busca e shiny preservados', a
   await page.reload();
   await page.locator('#lista-favoritos li').waitFor();
   assert.match(await page.locator('#lista-favoritos').innerText(), /Pikachu/);
+  await page.getByRole('button', { name: 'Abrir Pikachu' }).click();
+  await page.locator('#botao-shiny').waitFor();
+  assert.equal(await page.locator('#campo-busca').inputValue(), '25');
+  assert.equal(await page.locator('#quantidade-favoritos').innerText(), '1');
   await page.getByRole('button', { name: 'Excluir Pikachu' }).click();
   await page.getByText('Nenhum favorito salvo.').waitFor();
   assert.equal(records.length, 0);

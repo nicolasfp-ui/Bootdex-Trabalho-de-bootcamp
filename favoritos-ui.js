@@ -21,12 +21,23 @@
 
     function renderizar(registros) {
         lista.replaceChildren();
+        document.getElementById("quantidade-favoritos").textContent = String(registros.length);
         for (const favorito of registros) {
             const item = document.createElement("li");
             const nome = String(favorito.nome);
             const titulo = nome.charAt(0).toUpperCase() + nome.slice(1);
             const texto = document.createElement("span");
             texto.textContent = `#${favorito.pokemon_id} — ${titulo}`;
+            const abrir = document.createElement("button");
+            abrir.type = "button";
+            abrir.textContent = "Abrir";
+            abrir.setAttribute("aria-label", `Abrir ${titulo}`);
+            abrir.addEventListener("click", () => {
+                const campo = document.getElementById("campo-busca");
+                campo.value = String(favorito.pokemon_id);
+                document.getElementById("botao-buscar").click();
+                campo.focus();
+            });
             const excluir = document.createElement("button");
             excluir.type = "button";
             excluir.textContent = "Excluir";
@@ -35,7 +46,10 @@
                 await repositorio.excluir(favorito.id);
                 await atualizarAposMutacao("Favorito excluído");
             }));
-            item.append(texto, excluir);
+            const acoes = document.createElement("div");
+            acoes.className = "acoes-favorito";
+            acoes.append(abrir, excluir);
+            item.append(texto, acoes);
             lista.append(item);
         }
     }
