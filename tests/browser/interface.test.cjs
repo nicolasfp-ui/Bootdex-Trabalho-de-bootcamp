@@ -62,6 +62,8 @@ test('salvar, recarregar e excluir pela interface; busca e shiny preservados', a
   await page.reload();
   await page.locator('#lista-favoritos li').waitFor();
   assert.match(await page.locator('#lista-favoritos').innerText(), /Pikachu/);
+  await page.setViewportSize({ width: 375, height: 800 });
+  assert.equal(await page.locator('#lista-favoritos li').evaluate(el => getComputedStyle(el).alignItems), 'flex-start');
   await page.getByRole('button', { name: 'Abrir Pikachu' }).click();
   await page.locator('#botao-shiny').waitFor();
   assert.equal(await page.locator('#campo-busca').inputValue(), '25');

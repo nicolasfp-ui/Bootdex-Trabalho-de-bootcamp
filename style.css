@@ -19,9 +19,6 @@
 .favoritos p { margin: 12px 0; line-height: 1.5; }
 .favoritos ul { list-style: none; }
 .acoes-favorito { display: flex; gap: 8px; flex-wrap: wrap; }
-@media (max-width: 400px) {
-    .favoritos li { align-items: flex-start; flex-direction: column; }
-}
 .favoritos li {
     display: flex;
     justify-content: space-between;
@@ -30,6 +27,9 @@
     padding: 12px 0;
     border-bottom: 1px solid #eee;
     overflow-wrap: anywhere;
+}
+@media (max-width: 400px) {
+    .favoritos li { align-items: flex-start; flex-direction: column; }
 }
 .favoritos button, #salvar-favorito {
     border: 1px solid #c92f3b;
