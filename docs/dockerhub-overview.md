@@ -4,15 +4,15 @@ Pokédex web com busca por nome/número, sugestões, filtros por geração/tipo 
 
 ## Executar
 
-Após publicar a imagem com configuração pública do Supabase e substituir `SEU_DOCKER_ID`:
+Execute a imagem pública, com a configuração do Supabase incorporada:
 
 ```sh
-docker run -d -p 8080:80 SEU_DOCKER_ID/bootdex:1.1
+docker run -d -p 8080:80 nickfpceub/bootdex:1.1
 ```
 
 Acesse http://localhost:8080. Internet é necessária para a PokéAPI e o Supabase. Os favoritos são públicos: qualquer visitante pode adicionar e excluir. Não salve dados pessoais.
 
-Versões previstas: `1.0` (CRUD e Docker), `1.1` (abrir favoritos e contador), `latest` (1.1).
+Versões publicadas: `1.0` (CRUD e Docker), `1.1` (abrir favoritos e contador), `latest` (1.1).
 
 Código e documentação: https://github.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp
 

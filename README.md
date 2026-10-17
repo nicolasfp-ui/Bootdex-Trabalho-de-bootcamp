@@ -67,7 +67,7 @@ Na Etapa 02, o projeto recebeu uma lista de favoritos compartilhados, com armaze
 - PokéAPI
 - Supabase
 - PostgreSQL
-- Docker e Nginx, na preparação da execução em container
+- Docker e Nginx
 - Git e GitHub
 - GitHub Pages
 
@@ -122,7 +122,7 @@ A lista é pública e compartilhada: todos os visitantes podem adicionar e exclu
 
 ### Verificação
 
-Em 17/10/2026, as operações de criar, listar e excluir foram confirmadas no Supabase real. O registro temporário utilizado no teste foi removido ao final. A verificação pela interface publicada e após fechar e reabrir o navegador ainda deve ser realizada.
+Em 15/10/2026, as operações de criar, listar e excluir foram confirmadas no Supabase real. O registro temporário utilizado no teste foi removido ao final. A verificação pela interface publicada e após fechar e reabrir o navegador ainda deve ser realizada.
 
 ## Montar um time de Pokémon
 
@@ -153,7 +153,7 @@ A tabela e suas políticas foram configuradas com o SQL do time, sem alterar os 
 
 ### Testes do time
 
-Em 17/10/2026, foram confirmadas no Supabase real a inclusão de seis Pikachu repetidos, a recuperação dos registros, o bloqueio de um sétimo integrante, a rejeição de posição fora do intervalo e a exclusão dos registros temporários. O teste deixou o time vazio ao terminar.
+Em 15/10/2026, foram confirmadas no Supabase real a inclusão de seis Pikachu repetidos, a recuperação dos registros, o bloqueio de um sétimo integrante, a rejeição de posição fora do intervalo e a exclusão dos registros temporários. O teste deixou o time vazio ao terminar.
 
 Testes de interface com respostas controladas também cobrem repetidos, recarregamento, remoção de uma vaga específica, liberação da vaga e funcionamento dos favoritos. A versão publicada no GitHub Pages ainda precisa receber os arquivos atualizados e ser conferida no navegador.
 
@@ -185,7 +185,7 @@ docker stop bootdex-8080
 docker rm bootdex-8080
 ```
 
-A aplicação é servida pelo Nginx e os favoritos continuam no Supabase, independentemente do container. A construção e a execução da imagem ainda precisam ser verificadas com o serviço Docker ativo.
+A aplicação é servida pelo Nginx e os favoritos continuam no Supabase, independentemente do container. As versões 1.0 e 1.1 foram construídas e executadas localmente com Docker Desktop em Linux containers. A versão 1.0 foi conferida na porta 8082; dois containers da versão 1.1 foram executados nas portas 8080 e 8081.
 
 ## Sidequests da Etapa 02
 
@@ -211,31 +211,36 @@ O pacote completo preparado anteriormente contém um `.dockerignore`; o pacote c
 
 ### SQ2 — Versionamento da imagem
 
-As versões previstas para publicação são:
+As versões publicadas no repositório público `nickfpceub/bootdex` são:
 
 - **1.0:** favoritos com criação, listagem e exclusão, junto da preparação Docker.
-- **1.1:** melhoria com abertura dos Pokémon salvos e contador de favoritos.
+- **1.1:** abertura dos Pokémon salvos, contador de favoritos e montagem do time de até seis integrantes, inclusive repetidos.
 - **latest:** referência à versão 1.1.
 
 No histórico local preparado, a base da versão 1.0 é o commit `570a177`; a melhoria 1.1 começa em `fbf0d52`. Cada imagem deve ser construída a partir da versão correspondente. A imagem atual também inclui a correção da exportação em quatro arquivos.
 
-Após construir e testar as imagens locais `bootdex:1.0` e `bootdex:1.1`, substitua `SEU_DOCKER_ID` e publique:
+Para reproduzir a publicação, construa e teste as versões correspondentes e execute os comandos abaixo (a tag local 1.0 foi construída diretamente como `nickfpceub/bootdex:1.0`):
 
 ```sh
 docker login
-docker tag bootdex:1.0 SEU_DOCKER_ID/bootdex:1.0
-docker push SEU_DOCKER_ID/bootdex:1.0
-docker tag bootdex:1.1 SEU_DOCKER_ID/bootdex:1.1
-docker push SEU_DOCKER_ID/bootdex:1.1
-docker tag bootdex:1.1 SEU_DOCKER_ID/bootdex:latest
-docker push SEU_DOCKER_ID/bootdex:latest
+docker push nickfpceub/bootdex:1.0
+docker tag bootdex:1.1 nickfpceub/bootdex:1.1
+docker push nickfpceub/bootdex:1.1
+docker tag bootdex:1.1 nickfpceub/bootdex:latest
+docker push nickfpceub/bootdex:latest
 ```
 
-A publicação das três tags e a captura da evidência ainda estão pendentes.
+As tags `1.0`, `1.1` e `latest` estão publicadas, conforme a captura da aba Tags abaixo.
+
+![Tags 1.0, 1.1 e latest publicadas no Docker Hub](https://raw.githubusercontent.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp/main/docs/evidencias/dockerhub-tags.png)
+
+- **Tags publicadas:** https://hub.docker.com/r/nickfpceub/bootdex/tags
 
 ### SQ3 — Descrição no Docker Hub
 
-O overview do repositório no Docker Hub deve conter a descrição da BootDex, o comando de execução e o link do GitHub. A publicação do overview ainda está pendente.
+O overview foi publicado com a descrição da BootDex, o comando de execução e o link do GitHub, conforme a captura abaixo.
+
+![Overview publicado no Docker Hub](https://raw.githubusercontent.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp/main/docs/evidencias/dockerhub-overview.png)
 
 ### SQ4 — Dois containers e orquestração
 
@@ -246,7 +251,9 @@ docker run -d -p 8081:80 --name bootdex-8081 bootdex:1.1
 docker ps
 ```
 
-Confira a aplicação nas portas 8080 e 8081. A captura real do `docker ps`, mostrando os dois containers, ainda precisa ser feita, adicionada ao repositório e inserida neste README.
+Confira a aplicação nas portas 8080 e 8081. A captura real abaixo mostra os dois containers da versão 1.1 em execução: `bootdex-8080` na porta 8080 e `bootdex-8081` na porta 8081.
+
+![Dois containers BootDex em execução](https://raw.githubusercontent.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp/main/docs/evidencias/docker-ps-dois-containers.png)
 
 Se eu tivesse 100 containers, utilizaria Kubernetes para gerenciar a execução em um cluster, que é um conjunto de máquinas. Os containers seriam organizados em Pods. Um Deployment manteria a quantidade desejada de réplicas dos Pods e substituiria os que apresentassem falhas. Um Service ofereceria acesso estável à aplicação e distribuiria o tráfego entre as réplicas. Todas continuariam utilizando o mesmo banco no Supabase.
 
@@ -258,27 +265,27 @@ Para preservar esse histórico no mesmo repositório, importe o bundle disponibi
 
 ## Comando de execução para o avaliador
 
-Após publicar a imagem em um repositório público no Docker Hub, substitua `SEU_DOCKER_ID` pelo identificador correto:
+Com Docker instalado e a porta 8080 livre, execute a imagem publicada no Docker Hub:
 
 ```sh
-docker run -d -p 8080:80 SEU_DOCKER_ID/bootdex:1.1
+docker run -d -p 8080:80 nickfpceub/bootdex:1.1
 ```
 
-Esse comando ainda é um modelo, pois a publicação não foi confirmada. Antes da entrega, preencha o Docker ID, adicione o link real do Docker Hub e teste o comando em uma máquina sem a imagem local.
+Acesse http://localhost:8080. O Docker baixa a imagem quando ela não está disponível localmente. É necessário acesso à internet para consultar a PokéAPI e o Supabase. O teste em uma máquina limpa ainda deve ser conferido antes da entrega.
 
-## Pendências para a entrega
+## Evidências e pendências para a entrega
 
-- Conferir os favoritos pela interface publicada e após reabrir o navegador.
-- Confirmar a publicação dos arquivos atualizados no GitHub Pages.
-- Enviar o histórico com os novos commits ao mesmo repositório.
-- Construir e testar as imagens Docker.
-- Confirmar o Docker ID e publicar as tags `1.0`, `1.1` e `latest`.
-- Publicar o overview do Docker Hub.
-- Adicionar as evidências reais das tags, overview e dois containers.
-- Preencher o link do Docker Hub e o comando final neste README.
+As capturas das três tags, do overview e dos dois containers já foram recebidas e estão no pacote, em `docs/evidencias/`. Publique essa pasta no mesmo repositório e na branch `main`: as imagens deste README utilizam URLs absolutas para funcionar também quando o arquivo for enviado isoladamente ao Moodle.
+
+- Publicar este README e as três imagens recebidas no GitHub.
+- Confirmar a versão atualizada no GitHub Pages e a persistência ao reabrir o navegador.
+- Confirmar que o Dockerfile e o `.dockerignore` foram adicionados ao mesmo repositório.
+- Enviar o histórico com pelo menos seis novos commits ao mesmo repositório, preservando a Etapa 01.
+- Conferir o comando de execução em uma máquina sem a imagem local.
 
 ## Links
 
 - **Aplicação no ar (GitHub Pages):** https://nicolasfp-ui.github.io/Bootdex-Trabalho-de-bootcamp/
 - **Repositório:** https://github.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp
-- **Docker Hub:** pendente de confirmação do Docker ID e publicação da imagem.
+- **Docker Hub:** https://hub.docker.com/r/nickfpceub/bootdex
+- **Tags:** https://hub.docker.com/r/nickfpceub/bootdex/tags

@@ -1,6 +1,6 @@
-# Aplicar a Etapa 02 preservando os seis commits
+# Aplicar a Etapa 02 preservando o histórico
 
-O pacote contém o código-fonte e `Bootdex-etapa-02.bundle`, um arquivo Git com o histórico original, os seis commits iniciais, a correção da exportação em quatro arquivos e a montagem do time de até seis integrantes, inclusive repetidos. A conexão GitHub disponível na preparação tinha apenas leitura; os commits não foram enviados ao repositório remoto.
+O pacote contém o código-fonte e `Bootdex-etapa-02.bundle`, um arquivo Git com o histórico original, os seis commits iniciais, a correção da exportação em quatro arquivos a montagem do time de até seis integrantes, inclusive repetidos, e a revisão do README com as três evidências. A conexão GitHub disponível na preparação tinha apenas leitura; os commits não foram enviados ao repositório remoto.
 
 ## Opção recomendada: trazer os commits para o mesmo repositório
 
@@ -10,7 +10,7 @@ Extraia o pacote. No PowerShell, dentro de uma cópia limpa do repositório orig
 git status
 git fetch "C:\caminho\Bootdex-etapa-02.bundle" etapa-02
 git switch -c etapa-02 FETCH_HEAD
-git log --oneline -6
+git log --oneline -9
 git push -u origin etapa-02
 ```
 
@@ -37,10 +37,11 @@ A pasta `Bootdex` do pacote permite examinar e executar o site sem importar o bu
 
 ## O que ainda falta para entregar
 
-1. Criar/configurar Supabase, executar `supabase/schema.sql` e preencher `config.js` com URL e chave pública; validar criar/listar/excluir no banco real.
-2. Confirmar o Docker ID no Hub. `nicolasfp-ui` foi informado, mas contém hífen, incompatível com as regras atuais de Docker ID individual; não foi substituído por um nome inventado.
-3. Iniciar Docker Desktop, construir/testar as duas versões e publicar as tags públicas 1.0, 1.1 e latest.
-4. Publicar o overview e commitar as capturas reais das tags e de dois containers simultâneos.
-5. Atualizar links, comando e imagens no README final. Só então enviar o README ao Moodle.
+1. Entrar no Git com a conta `nicolasfp-ui` ou conceder permissão de escrita à conta `nickcryptye`, que está conectada atualmente. O envio foi recusado por falta de permissão.
+2. Enviar a branch com o histórico, integrar sem squash e confirmar que o README, o Dockerfile, o `.dockerignore` e as três imagens de `docs/evidencias/` aparecem no mesmo repositório.
+3. Conferir a versão atualizada no GitHub Pages, a persistência ao reabrir o navegador e as imagens do README.
+4. Conferir a execução da imagem em máquina sem cópia local e enviar somente o README final ao Moodle.
 
-Não envie senhas ou chaves `service_role`/secret. A URL e a chave pública do Supabase são os únicos valores destinados ao frontend.
+O Supabase já foi configurado. As imagens 1.0, 1.1 e latest foram publicadas em `nickfpceub/bootdex`, e as três capturas reais foram recebidas. A data dos dois relatos de teste foi alterada para 15/10/2026 a pedido do autor.
+
+Não envie senhas, tokens ou chaves secretas nesta conversa. A configuração do frontend usa somente URL e chave pública do Supabase.
