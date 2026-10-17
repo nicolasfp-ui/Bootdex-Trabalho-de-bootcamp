@@ -455,6 +455,7 @@ async function buscarPokemon() {
 
         // A busca da Etapa 01 continua funcionando se a integração não carregar.
         window.bootdexFavoritos?.mostrarBotao(dados);
+        window.bootdexTime?.mostrarBotao(dados);
 
         const imagemPokemon =
             document.getElementById(

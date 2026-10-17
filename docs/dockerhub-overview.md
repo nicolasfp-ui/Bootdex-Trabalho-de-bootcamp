@@ -1,6 +1,6 @@
 # BootDex
 
-Pokédex web com busca por nome/número, sugestões, filtros por geração/tipo e shiny. Os favoritos compartilhados são criados, listados e excluídos em PostgreSQL no Supabase. O frontend é servido por Nginx.
+Pokédex web com busca por nome/número, sugestões, filtros por geração/tipo e shiny. Os favoritos e o time compartilhado são armazenados em PostgreSQL no Supabase. O time permite até seis integrantes, inclusive Pokémon repetidos, com inclusão, abertura e remoção por vaga. O frontend é servido por Nginx.
 
 ## Executar
 
