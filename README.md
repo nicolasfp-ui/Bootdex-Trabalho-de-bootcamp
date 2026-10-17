@@ -122,7 +122,7 @@ A lista é pública e compartilhada: todos os visitantes podem adicionar e exclu
 
 ### Verificação
 
-Em 15/10/2026, as operações de criar, listar e excluir foram confirmadas no Supabase real. O registro temporário utilizado no teste foi removido ao final. A verificação pela interface publicada e após fechar e reabrir o navegador ainda deve ser realizada.
+Em 15/10/2026, as operações de criar, listar e excluir foram confirmadas no Supabase real. O registro temporário utilizado no teste foi removido ao final. A interface publicada no GitHub Pages também foi conferida: as listas do Supabase carregam e os dados já salvos são recuperados ao abrir a aplicação.
 
 ## Montar um time de Pokémon
 
@@ -155,11 +155,11 @@ A tabela e suas políticas foram configuradas com o SQL do time, sem alterar os 
 
 Em 15/10/2026, foram confirmadas no Supabase real a inclusão de seis Pikachu repetidos, a recuperação dos registros, o bloqueio de um sétimo integrante, a rejeição de posição fora do intervalo e a exclusão dos registros temporários. O teste deixou o time vazio ao terminar.
 
-Testes de interface com respostas controladas também cobrem repetidos, recarregamento, remoção de uma vaga específica, liberação da vaga e funcionamento dos favoritos. A versão publicada no GitHub Pages ainda precisa receber os arquivos atualizados e ser conferida no navegador.
+Testes de interface com respostas controladas também cobrem repetidos, recarregamento, remoção de uma vaga específica, liberação da vaga e funcionamento dos favoritos. A versão atualizada está publicada no GitHub Pages. Foram conferidos no site a busca por Pikachu, a alternância shiny, os botões de favoritos e time e o carregamento das duas listas pelo Supabase.
 
 ## Como executar com Docker
 
-Para a versão de quatro arquivos, utilize um `Dockerfile` na raiz com o seguinte conteúdo:
+O Dockerfile incluído no repositório copia os arquivos e módulos necessários. Para a versão consolidada em quatro arquivos, o equivalente é:
 
 ```dockerfile
 FROM nginx:stable-alpine
@@ -259,9 +259,9 @@ Se eu tivesse 100 containers, utilizaria Kubernetes para gerenciar a execução 
 
 ## Versionamento do projeto
 
-O histórico da Etapa 01 foi preservado na cópia local. Foram preparados seis novos commits para a Etapa 02, além da correção posterior da busca e da implementação do time de até seis integrantes.
+O histórico da Etapa 01 foi preservado. A Etapa 02 foi integrada à branch `main` pelo [pull request #1](https://github.com/nicolasfp-ui/Bootdex-Trabalho-de-bootcamp/pull/1), preservando os dez commits da implementação, documentação, evidências e verificação automatizada, sem squash.
 
-Para preservar esse histórico no mesmo repositório, importe o bundle disponibilizado no pacote completo e envie os commits pela sua conta, sem utilizar squash na integração. Enviar apenas os arquivos pelo navegador do GitHub não importa os seis commits preparados. O envio desse histórico ao repositório remoto ainda precisa ser confirmado.
+O README recebeu uma revisão final após a confirmação da publicação. O requisito mínimo de seis novos commits foi atendido no mesmo repositório.
 
 ## Comando de execução para o avaliador
 
@@ -271,17 +271,25 @@ Com Docker instalado e a porta 8080 livre, execute a imagem publicada no Docker 
 docker run -d -p 8080:80 nickfpceub/bootdex:1.1
 ```
 
-Acesse http://localhost:8080. O Docker baixa a imagem quando ela não está disponível localmente. É necessário acesso à internet para consultar a PokéAPI e o Supabase. O teste em uma máquina limpa ainda deve ser conferido antes da entrega.
+Acesse http://localhost:8080. O Docker baixa a imagem quando ela não está disponível localmente. É necessário acesso à internet para consultar a PokéAPI e o Supabase. O acesso público aos manifestos das três tags foi confirmado sem login de usuário: 1.0 e 1.1 possuem identificadores diferentes, e latest aponta para 1.1. Para reproduzir em outro computador com Docker, use o comando acima.
 
-## Evidências e pendências para a entrega
+## Evidências e conferência final
 
-As capturas das três tags, do overview e dos dois containers já foram recebidas e estão no pacote, em `docs/evidencias/`. Publique essa pasta no mesmo repositório e na branch `main`: as imagens deste README utilizam URLs absolutas para funcionar também quando o arquivo for enviado isoladamente ao Moodle.
+As três capturas reais estão publicadas em `docs/evidencias/` na branch `main` e aparecem nas seções de sidequests deste README. As imagens usam URLs absolutas para funcionar também quando o arquivo for enviado isoladamente ao Moodle.
 
-- Publicar este README e as três imagens recebidas no GitHub.
-- Confirmar a versão atualizada no GitHub Pages e a persistência ao reabrir o navegador.
-- Confirmar que o Dockerfile e o `.dockerignore` foram adicionados ao mesmo repositório.
-- Enviar o histórico com pelo menos seis novos commits ao mesmo repositório, preservando a Etapa 01.
-- Conferir o comando de execução em uma máquina sem a imagem local.
+- Persistência de favoritos e time testada no PostgreSQL do Supabase.
+- Time limitado a seis vagas, com Pokémon repetidos permitidos.
+- Seis testes da API e oito testes de interface aprovados no GitHub Actions.
+- Imagem Docker construída e arquivos servidos por Nginx verificados no GitHub Actions.
+- Versões 1.0, 1.1 e latest publicadas e acessíveis no Docker Hub.
+- Overview e execução simultânea de dois containers comprovados nas capturas.
+- Histórico integrado à main, preservando os commits da Etapa 01 e da Etapa 02.
+- GitHub Pages publicado, com busca, shiny e carregamento das listas conferidos.
+- Três imagens do README verificadas com resposta HTTP 200.
+
+## Entrega no Moodle
+
+Envie somente o arquivo `README.md` atualizado, conforme o enunciado. O código, o histórico e as evidências permanecem no repositório GitHub, e as imagens Docker estão no Docker Hub.
 
 ## Links
 
