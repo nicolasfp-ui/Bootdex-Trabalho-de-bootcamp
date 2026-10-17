@@ -149,9 +149,28 @@
 
         </section>
 
+        <section class="time-pokemon" aria-labelledby="titulo-time">
+            <h2 id="titulo-time">Meu time (<span id="quantidade-time">—</span>/6)</h2>
+            <p>Escolha até seis Pokémon. Repetidos são permitidos. Este time é compartilhado entre todos os visitantes.</p>
+            <button id="atualizar-time" type="button">Atualizar time</button>
+            <p id="status-time" role="status" aria-live="polite"></p>
+            <ul id="lista-time" class="lista-time" aria-label="Seis vagas do time"></ul>
+        </section>
+
+        <section class="favoritos" aria-labelledby="titulo-favoritos">
+            <h2 id="titulo-favoritos">Favoritos compartilhados (<span id="quantidade-favoritos">0</span>)</h2>
+            <p>Lista pública: todos os visitantes podem salvar e excluir Pokémon.</p>
+            <button id="atualizar-favoritos" type="button">Atualizar lista</button>
+            <p id="status-favoritos" role="status" aria-live="polite"></p>
+            <ul id="lista-favoritos"></ul>
+        </section>
     </main>
 
 
+    <script src="config.js"></script>
+    <script src="favoritos-api.js"></script>
+    <script src="favoritos-ui.js"></script>
+    <script src="time-ui.js"></script>
     <script src="script.js"></script>
 
 </body>

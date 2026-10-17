@@ -1,0 +1,31 @@
+name: Verificar BootDex
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  testes-e-imagem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: docker build -t bootdex:teste .
+      - name: Verificar arquivos servidos por Nginx
+        run: |
+          docker run -d -p 8080:80 --name bootdex-ci bootdex:teste
+          curl --retry 10 --retry-all-errors --retry-delay 1 --max-time 5 -fsS http://localhost:8080/ -o /tmp/bootdex.html
+          grep -q 'Favoritos compartilhados' /tmp/bootdex.html
+          curl -fsS http://localhost:8080/favoritos-api.js -o /dev/null
+          curl -fsS http://localhost:8080/config.js -o /dev/null
+      - name: Logs e limpeza
+        if: always()
+        run: |
+          docker logs bootdex-ci || true
+          docker rm -f bootdex-ci || true

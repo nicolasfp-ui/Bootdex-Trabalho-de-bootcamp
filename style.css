@@ -8,6 +8,100 @@
     padding: 0;
 }
 
+/* Etapa 02: lista compartilhada, independente dos resultados da PokéAPI. */
+.time-pokemon {
+    margin-top: 30px;
+    padding: 24px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.time-pokemon > p { margin: 12px 0; line-height: 1.5; }
+.lista-time {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+.vaga-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 200px;
+    padding: 12px 8px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.vaga-vazia { border-style: dashed; background: #f7f8fa; color: #666; }
+.numero-vaga { font-size: 13px; color: #666; }
+.acoes-time { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.time-pokemon button, #adicionar-time {
+    padding: 10px 12px;
+    border: 1px solid #286b51;
+    border-radius: 8px;
+    background: #286b51;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+#adicionar-time { margin: 20px 0 0 8px; }
+.time-pokemon button:disabled, #adicionar-time:disabled { opacity: 0.55; cursor: not-allowed; }
+.time-pokemon button:focus-visible, #adicionar-time:focus-visible { outline: 3px solid #457b9d; outline-offset: 3px; }
+@media (max-width: 480px) {
+    .lista-time { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #adicionar-time { margin-left: 0; }
+}
+@media (max-width: 320px) {
+    .lista-time { grid-template-columns: 1fr; }
+}
+
+.favoritos {
+    margin-top: 30px;
+    padding: 24px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.favoritos p { margin: 12px 0; line-height: 1.5; }
+.favoritos ul { list-style: none; }
+.acoes-favorito { display: flex; gap: 8px; flex-wrap: wrap; }
+.favoritos li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    overflow-wrap: anywhere;
+}
+@media (max-width: 400px) {
+    .favoritos li { align-items: flex-start; flex-direction: column; }
+}
+.favoritos button, #salvar-favorito {
+    border: 1px solid #c92f3b;
+    border-radius: 8px;
+    background: #c92f3b;
+    color: white;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+#salvar-favorito { margin-top: 20px; }
+.favoritos button:disabled, #salvar-favorito:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.favoritos button:focus-visible, #salvar-favorito:focus-visible {
+    outline: 3px solid #457b9d;
+    outline-offset: 3px;
+}
+
 
 body {
     min-height: 100vh;
